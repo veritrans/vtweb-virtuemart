@@ -107,7 +107,7 @@ class plgVMPaymentVeritranspay extends vmPSPlugin {
 		$products = $cart->products;
 		$usrBT = $order['details']['BT'];
 		//print_r($usrBT);
-		echo "\n\n";
+		//echo "\n\n";
 		$address = ((isset($order['details']['ST'])) ? $order['details']['ST'] : $order['details']['BT']);
 
 		$vendorModel = new VirtueMartModelVendor();
@@ -174,15 +174,15 @@ class plgVMPaymentVeritranspay extends vmPSPlugin {
 		$veritrans->unfinish_payment_return_url = JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginUserPaymentCancel&on=' . $order['details']['BT']->order_number . '&pm=' . $order['details']['BT']->virtuemart_paymentmethod_id);
 		$veritrans->error_payment_return_url = JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginUserPaymentCancel&on=' . $order['details']['BT']->order_number . '&pm=' . $order['details']['BT']->virtuemart_paymentmethod_id);
 
-		print_r ($veritrans);
-		echo "\n\n";
+		//print_r ($veritrans);
+		//echo "\n\n";
 		//print_r ($products);
 
 
 		$this->data['key'] = $veritrans->get_keys();
 
 		# printout keys to browser
-		var_dump($this->data['key']);
+		//var_dump($this->data['key']);
 
 		if(isset($this->data['key']['error_message'])){
 			echo $this->data['key']['error_message'];
