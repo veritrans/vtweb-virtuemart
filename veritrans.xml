@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="2.5" type="plugin" group="vmpayment" method="upgrade">
+    <name>VM Payment - veritrans</name>
+    <creationDate>August 01 2015</creationDate>
+    <author>Veritrans Merchant Integration Team</author>
+    <authorUrl>http://veritrans.co.id</authorUrl>
+    <copyright>Copyright (C) 2015 Veritrans. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>1.0</version>
+    <description><![CDATA[<a href="http://veritrans.co.id" target="_blank">veritrans</a> ]]>
+    </description>
+
+    <files>
+        <filename plugin="veritrans">veritrans.php</filename>
+        <folder>veritrans</folder>
+        <folder>language</folder>
+        <folder>fields</folder>
+    </files>
+
+    <vmconfig>
+        <fields name="params">
+            <!-- <fieldset name="fields" addfieldpath="/administrator/components/com_virtuemart/fields"/> -->
+            <!-- <fieldset name="veritrans" addfieldpath="/plugins/vmpayment/veritrans/veritrans/fields"> -->
+            <fieldset name="fields" addfieldpath="/administrator/components/com_virtuemart/fields">
+                <!-- <field type="getveritrans" level="level1"/> -->
+                <!-- <field class="level1" type="vmtitle" default="MAP settings"/> -->
+                
+                <field type="vmtitle" default="General Settings"
+                       description="Check your Veritrans MAP Account for Server-Key"/>
+
+                <field name="shop_mode" type="list" default="N" label="Environment"
+                       description="Sandbox for testing, Production for real transaction">
+                    <option value="test">Sandbox</option>
+                    <option value="production">Production</option>
+                </field>
+                <!-- <field class="shop_mode" type="vmtitle" default=""
+                       description="Please make sure you use correct environment, sandbox server key is for Sandbox environment."/> -->
+
+                <field name="serverkey" class="required" type="text" size="20" 
+                       label="Veritrans MAP Server-Key" description="Server-Key from Veritrans MAP"/>
+
+                <field type="vmtitle" default="Currency conversion rate to IDR"
+                       description="Fill with 1 if you already using IDR"/>
+                <field name="conversion_rate" class="required" type="number" default="1"
+                       label="Currency Conversion Rate to IDR" description="Example: if you use USD, then fill with 10000 (rate to IDR)"/>
+
+                <field name="cost_percent_total" class="required" type="hidden" default="0"/>
+                <field name="cost_per_transaction" class="required" type="hidden" default="0"/>
+                
+                <field type="vmtitle" default="Credit Card Security"
+                       description="You must enable 3D Secure. Please contact us if you wish to disable this feature in the Production environment."/>
+
+                <field name="is3ds" type="radio" default="1" label="Credit Card 3DSecure" description="Enable 3DS Secure for Credt Card transaction">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+              
+                <!-- <field class="level1" type="vmtitle" default="Order Status"/> -->
+                <field type="vmtitle" default="Payment Status"
+                       description="Payment status will be changed to these in the order list view in admin page"/>
+
+                <field class="" name="status_success" type="vmorderstate" scope="com_virtuemart"
+                       default="C"
+                       label="Order status successful transactions"
+                       description="Select the Order status to which the actual order is set, if the  IPN was successful. If using download selling options: select the status which enables the download (then the customer is instantly notified about the download via e-mail)."/>
+
+                <field class="" name="status_waiting" type="vmorderstate" scope="com_virtuemart"
+                       default="p"
+                       label="Order status Waiting transactions"
+                       description="Waiting transactions order status for orders when the payment is waiting customer payment "/>
+          
+                <field class="" name="status_canceled" type="vmorderstate" scope="com_virtuemart" default="X"
+                       label="Order status for failed transactions"
+                       description="Select an Order status for failed transactions."/>
+
+
+                <!-- Discounts -->
+                <!-- ============ -->
+              <!--   <field type="vmtitle" default="Transaction Fee for Customers"
+                       description="Enter Fees that will be applied when the payment option is selected"/>
+                <field name="cost_per_transaction" type="text" label="Fee per transaction"
+                       description="Flat amount to apply per transaction"/>
+                <field name="cost_percent_total" type="text" label="Percent of the total amount"
+                       description="Percent to apply to the total product amount. Shipment cost are not included"/> -->
+
+                <field type="vmtitle" default="Payment Channel"
+                       description="Choose payment channel you wish to activate, according to Veritrans agreement"/>
+                <field name="credit_card" type="radio" default="1" label="Credit Card">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="mandiri_clickpay" type="radio" default="1" label="Mandiri Clickpay">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="cimb_clicks" type="radio" default="1" label="CIMB Clicks">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="bank_transfer" type="radio" default="1" label="Bank Transfer">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="bri_epay" type="radio" default="1" label="BRI Epay">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="telkomsel_cash" type="radio" default="1" label="Telkomsel Tcash">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="xl_tunai" type="radio" default="1" label="XL Tunai">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="echannel" type="radio" default="1" label="Mandiri BillPayment">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="bbm_money" type="radio" default="1" label="BBM Money">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="cstore" type="radio" default="1" label="Indomaret">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+                <field name="indosat_dompetku" type="radio" default="1" label="Indosat Dompetku">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
+            </fieldset>
+            <fieldset name="template">
+<!--                 <field name="payment_logos" type="vmfiles" multiple="true" directory="/plugins/vmpayment/veritrans/veritrans/assets/"
+                       hide_none="1" label="Standard logo"
+                       size="40"
+                       description=""/> -->
+            </fieldset>
+        </fields>
+    </vmconfig>
+    <updateservers>
+        <!-- Note: No spaces or linebreaks allowed between the server tags -->
+        <server type="extension" name="VirtueMart plg_vmpayment_veritrans Update Site"></server>
+    </updateservers>
+</extension>
