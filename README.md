@@ -22,7 +22,7 @@ The following plugin is tested under following environment:
 #### Installation Process
 The manual installation method involves downloading our feature-rich plugin and uploading it to your webserver via your favourite FTP application.
 
-1. [Download](https://github.com/rizdaprasetya/vtweb-virtuemart3/archive/master.zip) the plugin file to your computer and unzip it, open the extracted folder, rename ``vtweb-virtuemart3-master`` folder to ``veritrans`` 
+1. [Download](https://github.com/veritrans/vtweb-virtuemart/archive/v1.0.zip) the plugin file to your computer and unzip it, open the extracted folder, rename ``vtweb-virtuemart3-master`` folder to ``veritrans`` 
 2. Using an FTP program, or your hosting control panel, upload the renamed folder to your Joomla modules installation's ``[Joomla folder]\plugins\vmpayment\`` directory.
 3. Make sure the uploaded plugin folder structure looks like this:
 ```
