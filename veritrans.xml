@@ -48,7 +48,7 @@
                 <field name="cost_per_transaction" class="required" type="hidden" default="0"/>
                 
                 <field type="vmtitle" default="Credit Card Security"
-                       description="You must enable 3D Secure. Please contact us if you wish to disable this feature in the Production environment."/>
+                       description="This should be enabled, please contact Veritrans if you wish to disable this"/>
 
                 <field name="is3ds" type="radio" default="1" label="Credit Card 3DSecure" description="Enable 3DS Secure for Credt Card transaction">
                     <option value="1">Enable</option>
@@ -129,12 +129,16 @@
                     <option value="1">Enable</option>
                     <option value="0">Disable</option>
                 </field>
+                <field name="mandiri_ecash" type="radio" default="1" label="Mandiri Ecash">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </field>
             </fieldset>
             <fieldset name="template">
-<!--                 <field name="payment_logos" type="vmfiles" multiple="true" directory="/plugins/vmpayment/veritrans/veritrans/assets/"
+                <field name="payment_logos" type="vmfiles" multiple="true" directory="/images/stories/virtuemart/payment"
                        hide_none="1" label="Standard logo"
                        size="40"
-                       description=""/> -->
+                       description=""/>
             </fieldset>
         </fields>
     </vmconfig>

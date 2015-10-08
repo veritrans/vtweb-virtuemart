@@ -151,8 +151,10 @@ class plgVmPaymentVeritrans extends vmPSPlugin {
 			$payements_type[] = 'bbm_money';
 		if($this->_currentMethod->cstore)
 			$payements_type[] = 'cstore';
-		if($this->_currentMethod->credit_card)
+		if($this->_currentMethod->indosat_dompetku)
 			$payements_type[] = 'indosat_dompetku';
+		if($this->_currentMethod->mandiri_ecash)
+			$payements_type[] = 'mandiri_ecash';
 
 		$conversion_rate = floatval($this->_currentMethod->conversion_rate);
 		if(!isset($conversion_rate) OR $conversion_rate='' OR $conversion_rate='1'){
@@ -289,7 +291,7 @@ class plgVmPaymentVeritrans extends vmPSPlugin {
 		vRequest::setVar('html', $html);
 
 		// $this->emptyCart(); 
-		header("Location: ".$vtweb_url);
+
 		return;
 	}
 
@@ -346,7 +348,7 @@ class plgVmPaymentVeritrans extends vmPSPlugin {
 	    if ($transaction_status == 'capture') {
 	      if ($fraud == 'challenge') {
 	        $payment_status = $this->_currentMethod->status_waiting;
-	        $comments = 'Payment status: Challenge, please resolve in Veritrans MAP';
+	        $comments = 'Payment status: Challange, please resolve in Veritrans MAP';
 	      }
 	      elseif ($fraud == 'accept') {
 	        $payment_status = $this->_currentMethod->status_success;
